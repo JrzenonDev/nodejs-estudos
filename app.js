@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const handlebars = require('express-handlebars');
+const bodyParser = require('body-parser');
+const Sequelize = require('sequelize');
 
 // Config
 // Template Engine
@@ -8,9 +10,12 @@ const handlebars = require('express-handlebars');
 app.engine('handlebars', handlebars({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
+// Body Parser
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
 
 // conexao
-const Sequelize = require('sequelize');
 const sequelize = new Sequelize('sistemaDeCadatro', 'root', '', {
   host: 'localhost',
   dialect: 'mysql'
@@ -23,7 +28,7 @@ app.get('/cad', (req, res) => {
 });
 
 app.post('/add', (req, res) => {
-  res.send('Formulário enviado com sucesso!');
+  res.send("Texto: " + req.body.titulo + " Conteudo: " + req.body.conteudo);
 });
 
 
