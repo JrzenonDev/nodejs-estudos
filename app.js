@@ -16,6 +16,16 @@ const sequelize = new Sequelize('sistemaDeCadatro', 'root', '', {
   dialect: 'mysql'
 });
 
+// rotas
+
+app.get('/cad', (req, res) => {
+  res.render('formulario');
+});
+
+app.post('/add', (req, res) => {
+  res.send('Formulário enviado com sucesso!');
+});
+
 
 
 // start server
